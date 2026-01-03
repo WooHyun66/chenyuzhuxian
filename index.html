@@ -8,23 +8,21 @@
         :root {
             --bg-color: #ffffff;
             --text-color: #333333;
-            --primary-color: #8e44ad;
+            --primary-color: #4a6ea9;
             --secondary-color: #e7e7e7;
             --card-bg: #f8f9fa;
-            --header-bg: #2c3e50;
-            --footer-bg: #2c3e50;
-            --active-color: #9b59b6;
+            --header-bg: #343a40;
+            --footer-bg: #343a40;
         }
 
         [data-theme="dark"] {
             --bg-color: #1a1a1a;
             --text-color: #e0e0e0;
-            --primary-color: #9b59b6;
+            --primary-color: #5d8aff;
             --secondary-color: #2d2d2d;
             --card-bg: #2a2a2a;
             --header-bg: #121212;
             --footer-bg: #121212;
-            --active-color: #8e44ad;
         }
 
         * {
@@ -35,7 +33,7 @@
         }
 
         body {
-            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+            font-family: 'Microsoft JhengHei', '微软正黑体', Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
@@ -55,24 +53,16 @@
             position: relative;
         }
 
-        .controls {
+        .theme-toggle {
             position: absolute;
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            display: flex;
-            gap: 10px;
-        }
-
-        .control-btn {
             background: none;
             border: none;
             color: white;
             cursor: pointer;
-            font-size: 1rem;
-            padding: 5px 10px;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
+            font-size: 1.2rem;
         }
 
         h1 {
@@ -87,7 +77,6 @@
 
         main {
             padding: 2rem 0;
-            min-height: calc(100vh - 200px);
         }
 
         .profession-grid {
@@ -141,52 +130,16 @@
         }
 
         .btn:hover {
-            background-color: var(--active-color);
+            background-color: #3a5a8c;
         }
 
-        .page {
+        .profession-page {
             display: none;
-        }
-
-        .active {
-            display: block;
         }
 
         .back-btn {
             margin-bottom: 1.5rem;
             display: inline-block;
-        }
-
-        .branch-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .branch-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .branch-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .branch-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .branch-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
         }
 
         .section {
@@ -223,6 +176,7 @@
             color: white;
             text-align: center;
             padding: 1.5rem 0;
+            margin-top: 2rem;
         }
 
         @media (max-width: 768px) {
@@ -230,15 +184,16 @@
                 font-size: 2rem;
             }
             
-            .profession-grid, .branch-grid {
+            .profession-grid {
                 grid-template-columns: 1fr;
             }
             
-            .controls {
+            .theme-toggle {
                 position: static;
                 transform: none;
                 margin-top: 1rem;
-                justify-content: center;
+                display: block;
+                width: 100%;
             }
         }
     </style>
@@ -246,171 +201,193 @@
 <body>
     <header>
         <div class="container">
-            <h1 id="mainTitle">诛仙世界职业指南</h1>
-            <p class="subtitle" id="subTitle">选择你的职业，探索最佳配置</p>
-            <div class="controls">
-                <button class="control-btn" id="themeToggle">🌓 主题</button>
-                <button class="control-btn" id="langToggle">简/繁</button>
-            </div>
+            <h1>诛仙世界职业指南</h1>
+            <p class="subtitle">选择你的职业，探索最佳配置</p>
+            <button class="theme-toggle" id="themeToggle">🌓 切换主题</button>
         </div>
     </header>
 
     <main class="container">
-        <!-- 首页 -->
-        <div id="homePage" class="page active">
-            <h2 id="chooseProfession">选择职业</h2>
+        <div id="homePage">
+            <h2>选择职业</h2>
             <div class="profession-grid">
-                <div class="profession-card" onclick="showPage('lingxiPage')">
-                    <img src="https://via.placeholder.com/600x400/8e44ad/ffffff?text=灵汐" alt="灵汐" class="profession-image">
+                <div class="profession-card" onclick="showProfession('mage')">
+                    <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_mage.jpg" alt="灵汐" class="profession-image">
                     <div class="profession-content">
-                        <h3 class="profession-title" id="lingxiTitle">灵汐</h3>
-                        <p class="profession-description" id="lingxiDesc">灵汐是强大的治疗职业，拥有优秀的群体治疗能力和增益效果，同时具备一定的输出能力。</p>
-                        <a href="#" class="btn" onclick="event.preventDefault(); showPage('lingxiPage')" id="lingxiBtn">查看详情</a>
+                        <h3 class="profession-title">灵汐</h3>
+                        <p class="profession-description">灵汐是强大的施法者，专精于奥术、火焰和冰霜魔法，拥有强大的范围伤害和控制能力。</p>
+                        <a href="#" class="btn" onclick="event.preventDefault(); showProfession('mage')">查看详情</a>
                     </div>
                 </div>
-                <div class="profession-card" onclick="showPage('tianyinPage')">
-                    <img src="https://via.placeholder.com/600x400/3498db/ffffff?text=天音" alt="天音" class="profession-image">
+                <div class="profession-card" onclick="showProfession('warrior')">
+                    <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_warrior.jpg" alt="天音" class="profession-image">
                     <div class="profession-content">
-                        <h3 class="profession-title" id="tianyinTitle">天音</h3>
-                        <p class="profession-description" id="tianyinDesc">天音是辅助型职业，擅长提供团队增益和控制效果，同时具备稳定的治疗能力。</p>
-                        <a href="#" class="btn" onclick="event.preventDefault(); showPage('tianyinPage')" id="tianyinBtn">查看详情</a>
+                        <h3 class="profession-title">天音</h3>
+                        <p class="profession-description">天音是近战专家，可以选择武器、狂暴或防护专精，拥有强大的物理伤害和防御能力。</p>
+                        <a href="#" class="btn" onclick="event.preventDefault(); showProfession('warrior')">查看详情</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 灵汐职业页面 -->
-        <div id="lingxiPage" class="page">
-            <a href="#" class="btn back-btn" onclick="event.preventDefault(); showPage('homePage')" id="backBtn1">← 返回职业选择</a>
-            <h2 id="lingxiGuideTitle">灵汐指南</h2>
-            
-            <h3 id="lingxiChooseMode">选择游戏模式</h3>
-            <div class="branch-grid">
-                <div class="branch-card" onclick="showPage('lingxiPvePage')">
-                    <div class="branch-icon">🏰</div>
-                    <h4 class="branch-title" id="lingxiPveTitle">PVE</h4>
-                    <p id="lingxiPveDesc">副本与团队内容</p>
-                </div>
-                <div class="branch-card" onclick="showPage('lingxiPvpPage')">
-                    <div class="branch-icon">⚔️</div>
-                    <h4 class="branch-title" id="lingxiPvpTitle">PVP</h4>
-                    <p id="lingxiPvpDesc">玩家对战内容</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 天音职业页面 -->
-        <div id="tianyinPage" class="page">
-            <a href="#" class="btn back-btn" onclick="event.preventDefault(); showPage('homePage')" id="backBtn2">← 返回职业选择</a>
-            <h2 id="tianyinGuideTitle">天音指南</h2>
-            
-            <h3 id="tianyinChooseMode">选择游戏模式</h3>
-            <div class="branch-grid">
-                <div class="branch-card" onclick="showPage('tianyinPvePage')">
-                    <div class="branch-icon">🏰</div>
-                    <h4 class="branch-title" id="tianyinPveTitle">PVE</h4>
-                    <p id="tianyinPveDesc">副本与团队内容</p>
-                </div>
-                <div class="branch-card" onclick="showPage('tianyinPvpPage')">
-                    <div class="branch-icon">⚔️</div>
-                    <h4 class="branch-title" id="tianyinPvpTitle">PVP</h4>
-                    <p id="tianyinPvpDesc">玩家对战内容</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 灵汐PVE页面 -->
-        <div id="lingxiPvePage" class="page">
-            <a href="#" class="btn back-btn" onclick="event.preventDefault(); showPage('lingxiPage')" id="backBtn3">← 返回灵汐选择</a>
-            <h2 id="lingxiPveGuideTitle">灵汐PVE指南</h2>
-            
-            <h3 id="lingxiChoosePveType">选择PVE类型</h3>
-            <div class="branch-grid">
-                <div class="branch-card" onclick="showPage('lingxiPveTeamPage')">
-                    <div class="branch-icon">👥</div>
-                    <h4 class="branch-title" id="lingxiPveTeamTitle">小队</h4>
-                    <p id="lingxiPveTeamDesc">5人小队配置</p>
-                </div>
-                <div class="branch-card" onclick="showPage('lingxiPveRaidPage')">
-                    <div class="branch-icon">👨‍👩‍👧‍👦</div>
-                    <h4 class="branch-title" id="lingxiPveRaidTitle">团队</h4>
-                    <p id="lingxiPveRaidDesc">10-25人团队配置</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 灵汐PVP页面 -->
-        <div id="lingxiPvpPage" class="page">
-            <a href="#" class="btn back-btn" onclick="event.preventDefault(); showPage('lingxiPage')" id="backBtn4">← 返回灵汐选择</a>
-            <h2 id="lingxiPvpGuideTitle">灵汐PVP指南</h2>
-            
-            <h3 id="lingxiChoosePvpType">选择PVP类型</h3>
-            <div class="branch-grid">
-                <div class="branch-card" onclick="showPage('lingxiPvpHongjunPage')">
-                    <div class="branch-icon">⚔️</div>
-                    <h4 class="branch-title" id="lingxiPvpHongjunTitle">鸿钧之战</h4>
-                    <p id="lingxiPvpHongjunDesc">3v3竞技场配置</p>
-                </div>
-                <div class="branch-card" onclick="showPage('lingxiPvpGvgPage')">
-                    <div class="branch-icon">🏰</div>
-                    <h4 class="branch-title" id="lingxiPvpGvgTitle">GVG</h4>
-                    <p id="lingxiPvpGvgDesc">帮派战配置</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 灵汐PVE小队页面 -->
-        <div id="lingxiPveTeamPage" class="page">
-            <a href="#" class="btn back-btn" onclick="event.preventDefault(); showPage('lingxiPvePage')" id="backBtn5">← 返回PVE选择</a>
-            <h2 id="lingxiPveTeamGuideTitle">灵汐小队PVE指南</h2>
+        <!-- 灵汐页面 -->
+        <div id="magePage" class="profession-page">
+            <a href="#" class="btn back-btn" onclick="event.preventDefault(); goBack()">← 返回职业选择</a>
+            <h2>灵汐指南</h2>
             
             <div class="section">
-                <h3 class="section-title" id="lingxiPveTeamAttrTitle">推荐属性</h3>
+                <h3 class="section-title">推荐属性</h3>
                 <ul class="attribute-list">
-                    <li class="attribute-item"><strong id="lingxiPveTeamAttr1">治疗强度</strong> - 提升治疗技能效果</li>
-                    <li class="attribute-item"><strong id="lingxiPveTeamAttr2">急速</strong> - 减少施法时间和公共冷却</li>
-                    <li class="attribute-item"><strong id="lingxiPveTeamAttr3">会心</strong> - 提高治疗暴击几率</li>
-                    <li class="attribute-item"><strong id="lingxiPveTeamAttr4">精神</strong> - 提升法力回复速度</li>
+                    <li class="attribute-item"><strong>智力</strong> - 提高法术强度和法力值</li>
+                    <li class="attribute-item"><strong>法术命中</strong> - 确保法术不会被抵抗</li>
+                    <li class="attribute-item"><strong>法术暴击</strong> - 增加法术暴击机率</li>
+                    <li class="attribute-item"><strong>法术穿透</strong> - 降低目标的法术抗性</li>
+                    <li class="attribute-item"><strong>急速</strong> - 减少施法时间和公共冷却</li>
                 </ul>
             </div>
             
             <div class="section">
-                <h3 class="section-title" id="lingxiPveTeamEquipTitle">推荐装备</h3>
+                <h3 class="section-title">推荐装备</h3>
                 <ul class="equipment-list">
                     <li class="equipment-item">
-                        <strong id="lingxiPveTeamEquip1">武器</strong>
-                        <p id="lingxiPveTeamEquip1Desc">【清心玉笛】主属性+治疗强度，特效：治疗暴击后10秒内治疗效果提升5%</p>
+                        <strong>头部</strong>
+                        <p>附魔: 燃烧谜团秘药 (法术强度+30, 暴击等级+20)</p>
+                        <p>宝石: 符文血玉石 (法术强度+19)</p>
                     </li>
                     <li class="equipment-item">
-                        <strong id="lingxiPveTeamEquip2">饰品</strong>
-                        <p id="lingxiPveTeamEquip2Desc">【潮汐之泪】使用后15秒内急速提高20%，冷却2分钟</p>
+                        <strong>肩膀</strong>
+                        <p>附魔: 强效风暴铭文 (法术强度+24, 暴击等级+15)</p>
+                    </li>
+                    <li class="equipment-item">
+                        <strong>胸甲</strong>
+                        <p>附魔: 强效属性 (全属性+10)</p>
+                    </li>
+                    <li class="equipment-item">
+                        <strong>武器</strong>
+                        <p>附魔: 强效法术能量 (法术强度+63)</p>
                     </li>
                 </ul>
             </div>
             
             <div class="section">
-                <h3 class="section-title" id="lingxiPveTeamTalentTitle">天书点法</h3>
+                <h3 class="section-title">天赋点法</h3>
                 <ul class="talent-list">
                     <li class="talent-item">
-                        <strong id="lingxiPveTeamTalent1">治疗专精</strong>
-                        <p id="lingxiPveTeamTalent1Desc">优先点出【潮涌】和【清心】天赋，强化群体治疗和持续治疗效果</p>
+                        <strong>奥术专精 (57/3/11)</strong>
+                        <p>专注于奥术衝击和奥术飞弹的爆发伤害，适合单目标输出</p>
                     </li>
                     <li class="talent-item">
-                        <strong id="lingxiPveTeamTalent2">辅助天赋</strong>
-                        <p id="lingxiPveTeamTalent2Desc">点出【水之护盾】为队友提供伤害减免</p>
+                        <strong>火焰专精 (55/16/0)</strong>
+                        <p>擅长持续伤害和范围效果，适合多目标战斗</p>
+                    </li>
+                    <li class="talent-item">
+                        <strong>冰霜专精 (0/0/61)</strong>
+                        <p>提供优秀的控制能力和生存力，适合PvP和特殊战斗</p>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <!-- 灵汐PVE团队页面 -->
-        <div id="lingxiPveRaidPage" class="page">
-            <a href="#" class="btn back-btn" onclick="event.preventDefault(); showPage('lingxiPvePage')" id="backBtn6">← 返回PVE选择</a>
-            <h2 id="lingxiPveRaidGuideTitle">灵汐团队PVE指南</h2>
+        <!-- 天音页面 -->
+        <div id="warriorPage" class="profession-page">
+            <a href="#" class="btn back-btn" onclick="event.preventDefault(); goBack()">← 返回职业选择</a>
+            <h2>天音指南</h2>
             
             <div class="section">
-                <h3 class="section-title" id="lingxiPveRaidAttrTitle">推荐属性</h3>
+                <h3 class="section-title">推荐属性</h3>
                 <ul class="attribute-list">
-                    <li class="attribute-item"><strong id="lingxiPveRaidAttr1">治疗强度</strong> - 提升治疗技能效果</li>
-                    <li class="attribute-item"><strong id="lingxiPveRaidAttr2">法力回复</strong> - 保证长时间战斗续航</li>
-                    <li class="attribute-item"><strong id="lingxiPveRaidAttr3">群体治疗加成
+                    <li class="attribute-item"><strong>力量</strong> - 提高攻击强度</li>
+                    <li class="attribute-item"><strong>命中</strong> - 确保攻击不会被躲闪/招架 (6%对首领)</li>
+                    <li class="attribute-item"><strong>精准</strong> - 降低目标的招架/躲闪机率 (6.5%对首领)</li>
+                    <li class="attribute-item"><strong>暴击</strong> - 增加暴击机率</li>
+                    <li class="attribute-item"><strong>破甲</strong> - 降低目标的护甲值</li>
+                    <li class="attribute-item"><strong>耐力</strong> - 增加生命值 (坦克专精优先)</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">推荐装备</h3>
+                <ul class="equipment-list">
+                    <li class="equipment-item">
+                        <strong>头部</strong>
+                        <p>附魔: 坚定防御者秘药 (防御等级+16, 躲闪等级+17) / 思维放大圆盘 (工程学)</p>
+                        <p>宝石: 致密天蓝石 (耐力+15)</p>
+                    </li>
+                    <li class="equipment-item">
+                        <strong>肩膀</strong>
+                        <p>附魔: 强效峭壁铭文 (防御等级+15, 躲闪等级+10)</p>
+                    </li>
+                    <li class="equipment-item">
+                        <strong>胸甲</strong>
+                        <p>附魔: 强效属性 (全属性+10)</p>
+                        <p>宝石: 致密天蓝石 / 鲜豔森林翡翠</p>
+                    </li>
+                    <li class="equipment-item">
+                        <strong>武器</strong>
+                        <p>附魔: 狂暴 (攻击强度+110) / 斩杀 (护甲穿透+120)</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">天赋点法</h3>
+                <ul class="talent-list">
+                    <li class="talent-item">
+                        <strong>武器战 (37/24/0)</strong>
+                        <p>专注于单体爆发伤害，适合PvP和特定首领战</p>
+                    </li>
+                    <li class="talent-item">
+                        <strong>狂暴战 (17/54/0)</strong>
+                        <p>擅长持续伤害和双持武器，适合长时间战斗</p>
+                    </li>
+                    <li class="talent-item">
+                        <strong>防护战 (15/5/51)</strong>
+                        <p>坦克专精，提供强大的生存能力和威胁值生成</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 诛仙世界职业指南 - 非官方网站</p>
+            <p>本网站仅供娱乐参考，实际游戏内容请以官方版本为准</p>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // 页面导航功能
+        function showProfession(profession) {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('magePage').style.display = 'none';
+            document.getElementById('warriorPage').style.display = 'none';
+            
+            document.getElementById(profession + 'Page').style.display = 'block';
+        }
+
+        function goBack() {
+            document.getElementById('homePage').style.display = 'block';
+            document.getElementById('magePage').style.display = 'none';
+            document.getElementById('warriorPage').style.display = 'none';
+        }
+
+        // 初始化显示首页
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('homePage').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
