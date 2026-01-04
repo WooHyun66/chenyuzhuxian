@@ -41,6 +41,8 @@
         }
 
         .container {
+            display: flex;
+            justify-content: space-between;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -100,7 +102,7 @@
             transform: translateY(-5px);
         }
 
-        .profession-image {
+        .profession-ilingxi {
             width: 100%;
             height: 200px;
             object-fit: cover;
@@ -202,37 +204,32 @@
 <body>
     <header>
         <div class="container">
-            <h1>诛仙世界 沉鱼治疗指南</h1>
-            <p class="subtitle">选择你的职业，探索最佳配置</p>
+            <h1>诛仙世界  沉鱼治疗指南</h1>
+            <p class="subtitle">选择你的职业  探索最佳配置</p>
             <button class="theme-toggle" id="themeToggle">🌓 切换主题</button>
         </div>
     </header>
 
     <main class="container">
         <div id="homePage">
-            <h2>选择职业</h2>
             <div class="profession-grid">
-                <div class="profession-card" onclick="showProfession('mage')">
-                    <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_mage.jpg" alt="灵汐" class="profession-image">
+                <div class="profession-card" onclick="showProfession('lingxi')">
                     <div class="profession-content">
                         <h3 class="profession-title">灵汐</h3>
-                        <p class="profession-description">灵汐是强大的施法者，专精于奥术、火焰和冰霜魔法，拥有强大的范围伤害和控制能力。</p>
-                        <a href="#" class="btn" onclick="event.preventDefault(); showProfession('mage')">查看详情</a>
+                        <a href="#" class="btn" onclick="event.preventDefault(); showProfession('lingxi')">查看详情</a>
                     </div>
                 </div>
-                <div class="profession-card" onclick="showProfession('warrior')">
-                    <img src="https://wow.zamimg.com/images/wow/icons/large/classicon_warrior.jpg" alt="天音" class="profession-image">
+                <div class="profession-card" onclick="showProfession('tianyin')">
                     <div class="profession-content">
                         <h3 class="profession-title">天音</h3>
-                        <p class="profession-description">天音是近战专家，可以选择武器、狂暴或防护专精，拥有强大的物理伤害和防御能力。</p>
-                        <a href="#" class="btn" onclick="event.preventDefault(); showProfession('warrior')">查看详情</a>
+                        <a href="#" class="btn" onclick="event.preventDefault(); showProfession('tianyin')">查看详情</a>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- 灵汐页面 -->
-        <div id="magePage" class="profession-page">
+        <div id="lingxiPage" class="profession-page">
             <a href="#" class="btn back-btn" onclick="event.preventDefault(); goBack()">← 返回职业选择</a>
             <h2>灵汐指南</h2>
             
@@ -290,7 +287,7 @@
         </div>
 
         <!-- 天音页面 -->
-        <div id="warriorPage" class="profession-page">
+        <div id="tianyinPage" class="profession-page">
             <a href="#" class="btn back-btn" onclick="event.preventDefault(); goBack()">← 返回职业选择</a>
             <h2>天音指南</h2>
             
@@ -352,7 +349,7 @@
 
     <footer>
         <div class="container">
-            <p>© 2026 诛仙世界职业指南 - 非官方网站</p>
+            <p>© 2026 一剑倾城 - 沉鱼 治疗指南</p>
             <p>本网站仅供参考</p>
         </div>
     </footer>
@@ -373,16 +370,16 @@
         // 页面导航功能
         function showProfession(profession) {
             document.getElementById('homePage').style.display = 'none';
-            document.getElementById('magePage').style.display = 'none';
-            document.getElementById('warriorPage').style.display = 'none';
+            document.getElementById('lingxiPage').style.display = 'none';
+            document.getElementById('tianyinPage').style.display = 'none';
             
             document.getElementById(profession + 'Page').style.display = 'block';
         }
 
         function goBack() {
             document.getElementById('homePage').style.display = 'block';
-            document.getElementById('magePage').style.display = 'none';
-            document.getElementById('warriorPage').style.display = 'none';
+            document.getElementById('lingxiPage').style.display = 'none';
+            document.getElementById('tianyinPage').style.display = 'none';
         }
 
         // 初始化显示首页
